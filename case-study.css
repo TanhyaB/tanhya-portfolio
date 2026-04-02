@@ -1,0 +1,602 @@
+/* ============================================================
+   Case Study Pages — case-study.css
+   Loaded alongside style.css on qualtrics.html (and future
+   case study pages). All design tokens (colours, fonts, spacing)
+   come from style.css :root — this file only adds the layouts
+   and components unique to case study pages.
+   ============================================================ */
+
+
+/* ----------------------------------------------------------
+   1. Nav: "← Back to work" link
+   ---------------------------------------------------------- */
+
+/* Right-hand link that replaces the nav-links list */
+.cs-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--color-text);
+  transition: color var(--ease-fast), gap var(--ease-fast);
+}
+
+.cs-back-link svg {
+  flex-shrink: 0;
+  transition: transform var(--ease-fast);
+}
+
+.cs-back-link:hover {
+  color: var(--color-accent);
+}
+
+.cs-back-link:hover svg {
+  transform: translateX(-3px);
+}
+
+.cs-back-link:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+
+/* ----------------------------------------------------------
+   2. Case Study Hero
+   ---------------------------------------------------------- */
+.cs-hero {
+  background: linear-gradient(150deg, var(--color-bg) 0%, #f5ede1 55%, #ecdcc8 100%);
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+.cs-hero-container {
+  max-width: 900px; /* narrower than full-width for readability */
+}
+
+.cs-hero-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+.cs-hero-subtitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-style: italic;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+  max-width: 680px;
+}
+
+/* Meta row: role / timeline / tools */
+.cs-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  margin-bottom: var(--space-lg);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.125rem 1.5rem;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.cs-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-inline: 1.5rem;
+}
+
+.cs-meta-item:first-child {
+  padding-left: 0;
+}
+
+.cs-meta-item dt {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.cs-meta-item dd {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+/* Vertical dividers between meta items */
+.cs-meta-divider {
+  width: 1px;
+  height: 36px;
+  background-color: var(--color-border);
+  flex-shrink: 0;
+}
+
+/* Wide hero image placeholder (16:9) */
+.cs-hero-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Terracotta gradient — same family as index.html project placeholders */
+  background: linear-gradient(135deg, #c1674a 0%, #d4784f 40%, #e8906a 75%, #f0a882 100%);
+  box-shadow: 0 16px 50px rgba(193, 103, 74, 0.22);
+}
+
+.cs-hero-image-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.125rem;
+  position: relative;
+  z-index: 1;
+  padding: var(--space-md);
+  text-align: center;
+}
+
+/* Reuse placeholder-icon / placeholder-label / placeholder-circle from style.css */
+
+
+/* ----------------------------------------------------------
+   3. Content sections
+   ---------------------------------------------------------- */
+
+/* Base section wrapper */
+.cs-section {
+  padding-block: var(--space-xl);
+}
+
+/* Alternating background on every other section */
+.cs-section--alt {
+  background-color: var(--color-bg-alt);
+}
+
+/* Constrain prose to a comfortable reading width */
+.cs-content {
+  max-width: 780px;
+}
+
+/* Section headings (h2) inside case studies */
+.cs-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.625rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text);
+  margin-bottom: var(--space-md);
+  position: relative;
+  display: inline-block;
+}
+
+/* Same decorative underline as .section-heading in style.css */
+.cs-heading::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 4px;
+  background-color: var(--color-accent-2);
+  border-radius: var(--radius-pill);
+  margin-top: 0.5rem;
+}
+
+/* Sub-headings (h3) inside process phases */
+.cs-subheading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.75rem;
+}
+
+/* Muted date label inside a sub-heading */
+.cs-phase-date {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  font-style: normal;
+}
+
+/* Body paragraphs */
+.cs-body {
+  font-size: 1.0625rem;
+  color: var(--color-text-muted);
+  line-height: 1.85;
+  margin-bottom: var(--space-md);
+  max-width: 680px;
+}
+
+.cs-body:last-child {
+  margin-bottom: 0;
+}
+
+/* Phase blocks: add space between each phase */
+.cs-phase {
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cs-phase:last-of-type {
+  border-bottom: none;
+}
+
+
+/* ----------------------------------------------------------
+   4. Callout box
+      Warm cream background with a terracotta left border.
+   ---------------------------------------------------------- */
+.cs-callout {
+  background-color: var(--color-accent-pale);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1.5rem 1.75rem;
+  margin-block: var(--space-md);
+  max-width: 680px;
+}
+
+.cs-callout-title {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.cs-callout-body {
+  font-size: 1rem;
+  color: var(--color-text);
+  line-height: 1.8;
+}
+
+
+/* ----------------------------------------------------------
+   5. Lists
+   ---------------------------------------------------------- */
+.cs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding-left: 0;
+  max-width: 680px;
+  margin-bottom: var(--space-md);
+}
+
+/* Bullet list — terracotta dot marker */
+.cs-list:not(.cs-list--numbered) li {
+  display: flex;
+  gap: 0.875rem;
+  font-size: 1.0625rem;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+}
+
+.cs-list:not(.cs-list--numbered) li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  margin-top: 0.6rem; /* vertically align dot with first line of text */
+}
+
+/* Numbered list */
+.cs-list--numbered {
+  list-style: none;
+  counter-reset: cs-counter;
+}
+
+.cs-list--numbered li {
+  display: flex;
+  gap: 1.125rem;
+  font-size: 1.0625rem;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+  counter-increment: cs-counter;
+}
+
+.cs-list--numbered li::before {
+  content: counter(cs-counter);
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+/* Bold labels inside list items */
+.cs-list li strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+
+/* ----------------------------------------------------------
+   6. Side-by-side image placeholders (Section 3)
+   ---------------------------------------------------------- */
+.cs-image-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+/* Individual placeholder in the pair */
+.cs-image-placeholder {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Slightly different gradient tones to distinguish the two */
+.cs-image-placeholder--a {
+  background: linear-gradient(135deg, #c1674a 0%, #e8836a 55%, #f0a882 100%);
+}
+
+.cs-image-placeholder--b {
+  background: linear-gradient(135deg, #b05540 0%, #cc7060 50%, #e09070 100%);
+}
+
+/* Smaller icon size inside the pair placeholders */
+.placeholder-icon--sm {
+  width: 40px;
+  height: 40px;
+}
+
+
+/* ----------------------------------------------------------
+   7. "Next Project" band
+   ---------------------------------------------------------- */
+.cs-next-project {
+  background: linear-gradient(110deg, #b85c40 0%, #c96b4f 45%, #d97d62 100%);
+  padding-block: var(--space-lg);
+}
+
+.cs-next-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.cs-next-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cs-next-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: -0.01em;
+  transition: gap var(--ease-base), opacity var(--ease-fast);
+}
+
+.cs-next-link svg {
+  flex-shrink: 0;
+  transition: transform var(--ease-base);
+}
+
+.cs-next-link:hover {
+  opacity: 0.88;
+}
+
+.cs-next-link:hover svg {
+  transform: translateX(5px);
+}
+
+.cs-next-link:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+
+/* ----------------------------------------------------------
+   8. Responsive
+   ---------------------------------------------------------- */
+@media (max-width: 720px) {
+
+  /* Meta row stacks vertically */
+  .cs-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    width: 100%;
+  }
+
+  .cs-meta-item {
+    padding-inline: 0;
+  }
+
+  .cs-meta-divider {
+    width: 100%;
+    height: 1px;
+  }
+
+  /* Side-by-side images stack */
+  .cs-image-pair {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-hero {
+    padding-top: var(--space-lg);
+  }
+
+  .cs-next-project {
+    padding-block: var(--space-md);
+  }
+}
+
+
+/* ----------------------------------------------------------
+   9. Dashboard architecture list
+      Two-column layout: number + title left, description right.
+      Each row sits on a subtle separator line so items are
+      clearly delineated without feeling heavy.
+   ---------------------------------------------------------- */
+.cs-dashboard-list {
+  list-style: none;
+  width: 100%;
+  /* Stretch to the full content column width */
+  max-width: 780px;
+  margin-bottom: var(--space-md);
+}
+
+.cs-dashboard-item {
+  display: grid;
+  /* Left col: fixed width so all titles start at the same x.
+     Right col: takes the remaining space. */
+  grid-template-columns: 220px 1fr;
+  align-items: start;
+  gap: 1.5rem;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cs-dashboard-item:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+/* Left column — number stacked above title */
+.cs-dashboard-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Large terracotta page number */
+.cs-dashboard-num {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Page name in charcoal */
+.cs-dashboard-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.35;
+}
+
+/* Right column — description */
+.cs-dashboard-desc {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  margin: 0;
+  /* Nudge down slightly so it optically aligns with the page name */
+  padding-top: 0.1rem;
+}
+
+/* Collapse to single column on mobile */
+@media (max-width: 580px) {
+  .cs-dashboard-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
+
+/* ----------------------------------------------------------
+   Key learnings list
+   Two columns: bold phrase left (fixed width), description right.
+   Matches the visual rhythm of the dashboard list above.
+   ---------------------------------------------------------- */
+.cs-learnings-list {
+  list-style: none;
+  width: 100%;
+  max-width: 780px;
+  margin-bottom: var(--space-md);
+}
+
+.cs-learnings-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cs-learnings-item:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+/* Bold key phrase — left column */
+.cs-learnings-phrase {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  line-height: 1.4;
+}
+
+/* Description — right column */
+.cs-learnings-desc {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+/* Collapse to single column on mobile */
+@media (max-width: 580px) {
+  .cs-learnings-item {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}
+
+
+/* ----------------------------------------------------------
+   10. Reduced-motion
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .cs-back-link:hover svg,
+  .cs-next-link:hover svg {
+    transform: none;
+    transition: none;
+  }
+}

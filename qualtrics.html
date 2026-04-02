@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qualtrics Dashboard — Tanhya Bascombe</title>
+
+  <!-- Same Google Fonts as index.html -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Shared stylesheet — same colours, fonts, buttons as index.html -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Case-study-specific styles -->
+  <link rel="stylesheet" href="case-study.css" />
+</head>
+<body>
+
+  <!-- =====================================================
+       NAV — same logo, "← Back to work" instead of section links
+       ===================================================== -->
+  <header class="nav-wrapper" id="nav">
+    <nav class="nav-inner" aria-label="Main navigation">
+
+      <!-- Logo (same markup as index.html) -->
+      <a href="index.html" class="nav-logo" aria-label="Tanhya Bascombe — back to portfolio">
+        Tanhya&nbsp;<span class="nav-logo-surname">Bascombe</span><span class="nav-logo-dot" aria-hidden="true">.</span>
+      </a>
+
+      <!-- Back link -->
+      <a href="index.html#projects" class="cs-back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
+          <path d="M15 10H5m0 0l4-4m-4 4l4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        Back to work
+      </a>
+
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+    <section class="cs-hero" aria-label="Case study introduction">
+      <div class="container cs-hero-container">
+
+        <!-- Label + heading + subtitle -->
+        <p class="section-eyebrow animate-on-scroll">Research Operations</p>
+
+        <h1 class="cs-hero-heading animate-on-scroll">
+          Customer Experience Measurement Programme
+        </h1>
+
+        <p class="cs-hero-subtitle animate-on-scroll">
+          How I built a real-time feedback dashboard from scratch — and ran it solo for 9 months
+        </p>
+
+        <!-- Meta row: role / timeline / tools -->
+        <dl class="cs-meta animate-on-scroll" aria-label="Project metadata">
+          <div class="cs-meta-item">
+            <dt>Role</dt>
+            <dd>Sole UX Designer</dd>
+          </div>
+          <div class="cs-meta-divider" aria-hidden="true"></div>
+          <div class="cs-meta-item">
+            <dt>Timeline</dt>
+            <dd>March 2025 – January 2026</dd>
+          </div>
+          <div class="cs-meta-divider" aria-hidden="true"></div>
+          <div class="cs-meta-item">
+            <dt>Tools</dt>
+            <dd>Qualtrics, Excel, CoPilot</dd>
+          </div>
+        </dl>
+
+        <!-- Wide hero image placeholder (16:9) -->
+        <div class="cs-hero-image animate-on-scroll" aria-label="Dashboard screenshot coming soon">
+          <div class="cs-hero-image-inner">
+            <!-- Monitor/dashboard icon -->
+            <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" aria-hidden="true" focusable="false">
+              <rect x="3" y="6" width="50" height="34" rx="3" fill="none" stroke="currentColor" stroke-width="3"/>
+              <line x1="3"  y1="17" x2="53" y2="17" stroke="currentColor" stroke-width="2.5"/>
+              <line x1="14" y1="6"  x2="14" y2="40" stroke="currentColor" stroke-width="2"/>
+              <rect x="8"  y="22" width="4" height="12" rx="1"/>
+              <rect x="16" y="26" width="4" height="8"  rx="1"/>
+              <rect x="24" y="20" width="4" height="14" rx="1"/>
+              <rect x="32" y="24" width="4" height="10" rx="1"/>
+              <rect x="40" y="18" width="4" height="16" rx="1"/>
+              <line x1="22" y1="40" x2="34" y2="40" stroke="currentColor" stroke-width="3"/>
+              <line x1="28" y1="40" x2="28" y2="50" stroke="currentColor" stroke-width="3"/>
+              <line x1="18" y1="50" x2="38" y2="50" stroke="currentColor" stroke-width="3"/>
+            </svg>
+            <span class="placeholder-label">Dashboard Screenshot Coming Soon</span>
+          </div>
+          <!-- Decorative circles -->
+          <div class="placeholder-circle placeholder-circle--tl" aria-hidden="true"></div>
+          <div class="placeholder-circle placeholder-circle--br" aria-hidden="true"></div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         STATS — warm terracotta bar (reuses index.html styles)
+         ===================================================== -->
+    <div class="hero-stats" aria-label="Key project stats">
+      <div class="container stats-row">
+
+        <div class="stat animate-on-scroll">
+          <span class="stat-number">2,307</span>
+          <span class="stat-label">Exit survey responses</span>
+        </div>
+
+        <div class="stat-divider" aria-hidden="true"></div>
+
+        <div class="stat animate-on-scroll">
+          <span class="stat-number">915</span>
+          <span class="stat-label">Feedback button responses</span>
+        </div>
+
+        <div class="stat-divider" aria-hidden="true"></div>
+
+        <div class="stat animate-on-scroll">
+          <span class="stat-number">9 months</span>
+          <span class="stat-label">Operating as sole designer</span>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- =====================================================
+         SECTION 1 — The Problem
+         ===================================================== -->
+    <section class="cs-section" aria-labelledby="s-problem">
+      <div class="container cs-content">
+
+        <h2 id="s-problem" class="cs-heading animate-on-scroll">The Problem</h2>
+
+        <p class="cs-body animate-on-scroll">
+          AAT had no way to track what customers were experiencing on their website in real time.
+          Feedback was either lost or collected manually using spreadsheets — slow, inconsistent,
+          and hard to act on. There was no system, no dashboard, and no process. I was brought in
+          to fix that from scratch.
+        </p>
+
+        <!-- Callout box -->
+        <aside class="cs-callout animate-on-scroll" aria-label="Operating Solo highlight">
+          <p class="cs-callout-title">Operating Solo</p>
+          <p class="cs-callout-body">
+            I was the only UX designer from February to November 2025 — 9 months. I had to identify
+            the problem, design the solution, maintain monthly operations, AND build the automation,
+            all while managing other UX projects.
+          </p>
+        </aside>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         SECTION 2 — My Role
+         ===================================================== -->
+    <section class="cs-section cs-section--alt" aria-labelledby="s-role">
+      <div class="container cs-content">
+
+        <h2 id="s-role" class="cs-heading animate-on-scroll">What I Was Responsible For</h2>
+
+        <ul class="cs-list animate-on-scroll" aria-label="Responsibilities">
+          <li>Built a 6-page dashboard system in Qualtrics from scratch</li>
+          <li>Ran monthly research operations processing around 150 responses per month</li>
+          <li>Worked with the Insight Lead to build a shared theme taxonomy</li>
+          <li>Analysed customer feedback to spot platform issues</li>
+          <li>Presented findings to the CX Director and stakeholders every two weeks</li>
+          <li>Created an insights-to-action framework to drive real fixes</li>
+        </ul>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         SECTION 3 — The Process
+         ===================================================== -->
+    <section class="cs-section" aria-labelledby="s-process">
+      <div class="container cs-content">
+
+        <h2 id="s-process" class="cs-heading animate-on-scroll">The Process: Manual to Automated</h2>
+
+        <!-- Phase 1 -->
+        <div class="cs-phase animate-on-scroll">
+          <h3 class="cs-subheading">Phase 1 — Manual Operations <span class="cs-phase-date">(March–December 2025)</span></h3>
+          <p class="cs-body">
+            For 9 months I ran everything manually because stakeholders needed insights straight away.
+            Every month I would export around 150 new responses, clean and process the data in Excel,
+            use CoPilot to categorise themes, update the master spreadsheet, create an insights report,
+            and present findings to stakeholders. It was time consuming — but it proved the value of
+            the system and built buy-in for automation.
+          </p>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="cs-phase animate-on-scroll">
+          <h3 class="cs-subheading">Phase 2 — Building the Dashboard</h3>
+          <p class="cs-body">
+            While keeping the monthly operations running, I designed and built the automated dashboard
+            in Qualtrics. This meant designing the 6-page architecture, building data visualisations
+            and filters, testing with stakeholders, and documenting how to use it.
+          </p>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="cs-phase animate-on-scroll">
+          <h3 class="cs-subheading">Phase 3 — Automation Launch <span class="cs-phase-date">(January 2026)</span></h3>
+          <p class="cs-body">
+            The dashboard went live in January 2026. Stakeholders can now access real-time insights
+            without any manual work from me. 9 months of tracked data, all in one place.
+          </p>
+        </div>
+
+        <!-- Side-by-side image placeholders -->
+        <div class="cs-image-pair animate-on-scroll" aria-label="Process screenshots coming soon">
+
+          <div class="cs-image-placeholder cs-image-placeholder--a">
+            <div class="placeholder-inner">
+              <svg class="placeholder-icon placeholder-icon--sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                <rect x="4"  y="28" width="8"  height="16" rx="2"/>
+                <rect x="16" y="18" width="8"  height="26" rx="2"/>
+                <rect x="28" y="10" width="8"  height="34" rx="2"/>
+                <rect x="40" y="22" width="8"  height="22" rx="2"/>
+              </svg>
+              <span class="placeholder-label">Manual Process · Screenshot Coming Soon</span>
+            </div>
+            <div class="placeholder-circle placeholder-circle--tl" aria-hidden="true"></div>
+            <div class="placeholder-circle placeholder-circle--br" aria-hidden="true"></div>
+          </div>
+
+          <div class="cs-image-placeholder cs-image-placeholder--b">
+            <div class="placeholder-inner">
+              <svg class="placeholder-icon placeholder-icon--sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                <rect x="2"  y="2"  width="44" height="30" rx="3" fill="none" stroke-width="3"/>
+                <rect x="2"  y="38" width="20" height="8"  rx="2"/>
+                <rect x="26" y="38" width="20" height="8"  rx="2"/>
+                <line x1="2"  y1="12" x2="46" y2="12" stroke-width="2.5"/>
+                <line x1="16" y1="2"  x2="16" y2="32" stroke-width="2.5"/>
+              </svg>
+              <span class="placeholder-label">Dashboard Build · Screenshot Coming Soon</span>
+            </div>
+            <div class="placeholder-circle placeholder-circle--tl" aria-hidden="true"></div>
+            <div class="placeholder-circle placeholder-circle--br" aria-hidden="true"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         SECTION 4 — Dashboard Architecture
+         ===================================================== -->
+    <section class="cs-section cs-section--alt" aria-labelledby="s-architecture">
+      <div class="container cs-content">
+
+        <h2 id="s-architecture" class="cs-heading animate-on-scroll">The 6-Page Dashboard</h2>
+
+        <p class="cs-body animate-on-scroll">
+          Each page was designed for a different audience and decision-making need:
+        </p>
+
+        <ol class="cs-dashboard-list animate-on-scroll" aria-label="Dashboard pages">
+          <li class="cs-dashboard-item">
+            <div class="cs-dashboard-left">
+              <span class="cs-dashboard-num">01</span>
+              <span class="cs-dashboard-title">Executive Summary</span>
+            </div>
+            <p class="cs-dashboard-desc">High-level overview for leadership. Total responses, overall sentiment, and trends over time.</p>
+          </li>
+          <li class="cs-dashboard-item">
+            <div class="cs-dashboard-left">
+              <span class="cs-dashboard-num">02</span>
+              <span class="cs-dashboard-title">Overall Experience &amp; Journey Insights</span>
+            </div>
+            <p class="cs-dashboard-desc">Deep dive into NPS, task completion, ease of navigation, content clarity, and sentiment.</p>
+          </li>
+          <li class="cs-dashboard-item">
+            <div class="cs-dashboard-left">
+              <span class="cs-dashboard-num">03</span>
+              <span class="cs-dashboard-title">NPS Insights &amp; Drivers</span>
+            </div>
+            <p class="cs-dashboard-desc">Current period NPS with sentiment and verbatim feedback, plus long-term trend data.</p>
+          </li>
+          <li class="cs-dashboard-item">
+            <div class="cs-dashboard-left">
+              <span class="cs-dashboard-num">04</span>
+              <span class="cs-dashboard-title">Task Intent &amp; Page Location</span>
+            </div>
+            <p class="cs-dashboard-desc">Maps what customers were trying to do and where they were on the site — critical for finding high-friction pages.</p>
+          </li>
+          <li class="cs-dashboard-item">
+            <div class="cs-dashboard-left">
+              <span class="cs-dashboard-num">05</span>
+              <span class="cs-dashboard-title">Themes &amp; Opportunities</span>
+            </div>
+            <p class="cs-dashboard-desc">Feedback categorised by theme with frequency counts to help prioritise fixes.</p>
+          </li>
+          <li class="cs-dashboard-item">
+            <div class="cs-dashboard-left">
+              <span class="cs-dashboard-num">06</span>
+              <span class="cs-dashboard-title">Verbatim Explorer</span>
+            </div>
+            <p class="cs-dashboard-desc">Searchable interface for reading raw customer comments (planned).</p>
+          </li>
+        </ol>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         SECTION 5 — Real Impact
+         ===================================================== -->
+    <section class="cs-section" aria-labelledby="s-impact">
+      <div class="container cs-content">
+
+        <h2 id="s-impact" class="cs-heading animate-on-scroll">Real Impact</h2>
+
+        <p class="cs-body animate-on-scroll">
+          The dashboard doesn't just report data — it drives real fixes.
+        </p>
+
+        <!-- Callout box -->
+        <aside class="cs-callout animate-on-scroll" aria-label="400 Error Crisis example">
+          <p class="cs-callout-title">Example: 400 Error Crisis</p>
+          <p class="cs-callout-body">
+            The dashboard flagged a high volume of 400 errors on the learning portal — a critical page
+            for students trying to access study materials. I raised this with the platform manager who
+            worked with the third-party platform owners. Errors were reduced and the IT team put
+            workarounds in place, directly improving the student experience.
+          </p>
+        </aside>
+
+        <p class="cs-body animate-on-scroll">
+          Other impacts include identifying confusing navigation patterns (which led to my Quick Links
+          project), spotting registration funnel drop-offs, and surfacing content clarity issues
+          across the site.
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         SECTION 6 — Key Learnings
+         ===================================================== -->
+    <section class="cs-section cs-section--alt" aria-labelledby="s-learnings">
+      <div class="container cs-content">
+
+        <h2 id="s-learnings" class="cs-heading animate-on-scroll">What I Learnt</h2>
+
+        <ul class="cs-learnings-list animate-on-scroll" aria-label="Key learnings">
+          <li class="cs-learnings-item">
+            <strong class="cs-learnings-phrase">Prove value before scaling</strong>
+            <span class="cs-learnings-desc">Running manually for 9 months showed the system worked before investing in automation.</span>
+          </li>
+          <li class="cs-learnings-item">
+            <strong class="cs-learnings-phrase">Balance operations and building</strong>
+            <span class="cs-learnings-desc">Delivering monthly insights while building the future system showed stakeholders I could ship.</span>
+          </li>
+          <li class="cs-learnings-item">
+            <strong class="cs-learnings-phrase">Collaboration amplifies impact</strong>
+            <span class="cs-learnings-desc">Working with the Insight Lead on theme categories created cross-functional alignment.</span>
+          </li>
+          <li class="cs-learnings-item">
+            <strong class="cs-learnings-phrase">Insights need action</strong>
+            <span class="cs-learnings-desc">Data means nothing without a framework that drives actual platform fixes.</span>
+          </li>
+        </ul>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         SECTION 7 — What's Next
+         ===================================================== -->
+    <section class="cs-section" aria-labelledby="s-next-steps">
+      <div class="container cs-content">
+
+        <h2 id="s-next-steps" class="cs-heading animate-on-scroll">What's Next</h2>
+
+        <ul class="cs-list animate-on-scroll" aria-label="Next steps">
+          <li>Building the dashboard for the feedback button survey (915 responses ready)</li>
+          <li>Completing the Themes &amp; Opportunities page</li>
+          <li>Designing the Verbatim Explorer for qualitative research</li>
+          <li>Training more stakeholders to use the dashboard independently</li>
+        </ul>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         NEXT PROJECT — terracotta CTA band at the foot of the page
+         ===================================================== -->
+    <section class="cs-next-project" aria-label="Next project">
+      <div class="container cs-next-inner animate-on-scroll">
+        <span class="cs-next-label">Next Project</span>
+        <a href="student-registration.html" class="cs-next-link">
+          Student Registration Redesign
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+            <path d="M5 10h10m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =====================================================
+       FOOTER — same as index.html
+       ===================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="footer-name">Tanhya Bascombe</span>
+      <span class="footer-copy">&copy; 2026 Tanhya Bascombe. Designed with care.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

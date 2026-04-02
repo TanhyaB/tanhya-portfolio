@@ -1,0 +1,1092 @@
+/* ============================================================
+   Tanhya Bascombe — UX Designer Portfolio
+   Stylesheet v2
+   ============================================================ */
+
+
+/* ----------------------------------------------------------
+   1. CSS Custom Properties (Design Tokens)
+      All colours, fonts, spacing, and radii live here so you
+      can easily reskin the whole site by editing this block.
+   ---------------------------------------------------------- */
+:root {
+  /* --- Colours --- */
+  --color-bg:         #faf7f2;   /* warm cream — main background          */
+  --color-bg-alt:     #f0ebe3;   /* slightly darker cream — alt sections  */
+  --color-text:       #2d2d2d;   /* dark charcoal — body text             */
+  --color-text-muted: #6b6258;   /* softer tone — secondary text          */
+  --color-accent:     #c1674a;   /* terracotta — primary accent           */
+  --color-accent-2:   #e8836a;   /* warm coral — hover / secondary accent */
+  --color-accent-pale:#fdf0eb;   /* very pale terracotta — badge bg       */
+  --color-white:      #ffffff;
+  --color-border:     rgba(193, 103, 74, 0.15);
+
+  /* --- Fonts --- */
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* --- Spacing scale --- */
+  --space-xs:  0.5rem;    /*  8px */
+  --space-sm:  1rem;      /* 16px */
+  --space-md:  2rem;      /* 32px */
+  --space-lg:  4rem;      /* 64px */
+  --space-xl:  6rem;      /* 96px */
+  --space-2xl: 8rem;      /* 128px */
+
+  /* --- Radii --- */
+  --radius-sm:   8px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-pill: 999px;
+
+  /* --- Transitions --- */
+  --ease-fast: 150ms ease;
+  --ease-base: 280ms ease;
+  --ease-slow: 500ms ease;
+
+  /* --- Nav height (used for scroll-margin offset) --- */
+  --nav-height: 70px;
+}
+
+
+/* ----------------------------------------------------------
+   2. Reset & Base
+   ---------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;  /* 17px */
+  line-height: 1.75;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Ensure sections account for sticky nav when scrolled to */
+section[id] {
+  scroll-margin-top: calc(var(--nav-height) + 8px);
+}
+
+
+/* ----------------------------------------------------------
+   3. Container — max-width wrapper used in every section
+   ---------------------------------------------------------- */
+.container {
+  width: min(100%, 1120px);
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+}
+
+
+/* ----------------------------------------------------------
+   4. Scroll-triggered animations
+      Elements start invisible (via CSS), JS adds .is-visible
+      when they enter the viewport via IntersectionObserver.
+   ---------------------------------------------------------- */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity  0.65s ease,
+    transform 0.65s ease;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger hero text and photo */
+.hero-text.animate-on-scroll    { transition-delay: 0.05s; }
+.hero-photo-wrap.animate-on-scroll { transition-delay: 0.2s; }
+
+/* Stagger the stat items */
+.stats-row .stat:nth-child(1) { transition-delay: 0.1s; }
+.stats-row .stat:nth-child(2) { transition-delay: 0.2s; }
+.stats-row .stat:nth-child(3) { transition-delay: 0.3s; }
+
+/* Stagger project rows slightly */
+.project-row:nth-child(2).animate-on-scroll { transition-delay: 0.05s; }
+.project-row:nth-child(3).animate-on-scroll { transition-delay: 0.1s;  }
+
+
+/* ----------------------------------------------------------
+   5. Reusable Buttons
+   ---------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.875rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition:
+    background-color var(--ease-fast),
+    color            var(--ease-fast),
+    box-shadow       var(--ease-fast),
+    transform        var(--ease-fast);
+  white-space: nowrap;
+}
+
+.btn svg {
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Solid terracotta fill */
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  box-shadow: 0 4px 18px rgba(193, 103, 74, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(232, 131, 106, 0.38);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Outlined */
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+/* Ghost — subtle with a muted border */
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+
+/* ----------------------------------------------------------
+   6. Section typography helpers
+   ---------------------------------------------------------- */
+
+/* Small uppercase label above a heading */
+.section-eyebrow {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.6rem;
+}
+
+/* Section headings (h2) */
+.section-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.5vw, 2.875rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-text);
+  margin-bottom: var(--space-md);
+  position: relative;
+  display: inline-block;
+}
+
+/* Decorative underline accent below every section heading */
+.section-heading::after {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 4px;
+  background-color: var(--color-accent-2);
+  border-radius: var(--radius-pill);
+  margin-top: 0.6rem;
+}
+
+
+/* ----------------------------------------------------------
+   7. Navigation
+   ---------------------------------------------------------- */
+.nav-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid transparent;
+  transition:
+    box-shadow     var(--ease-base),
+    border-color   var(--ease-base);
+}
+
+/* JS adds .scrolled once user scrolls past ~10px */
+.nav-wrapper.scrolled {
+  box-shadow: 0 2px 24px rgba(45, 45, 45, 0.09);
+  border-color: var(--color-border);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-height);
+  width: min(100%, 1120px);
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+}
+
+/* Logo */
+.nav-logo {
+  font-family: var(--font-heading);
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--color-text);       /* charcoal name for contrast */
+  letter-spacing: -0.02em;
+  transition: opacity var(--ease-fast);
+  line-height: 1;
+}
+
+.nav-logo:hover {
+  opacity: 0.75;
+}
+
+/* "Bascombe" — terracotta second word */
+.nav-logo-surname {
+  color: var(--color-accent);
+}
+
+/* Terracotta dot — design detail after the full name */
+.nav-logo-dot {
+  color: var(--color-accent);
+  font-size: 2rem;
+  line-height: 0;
+  vertical-align: -0.1em;
+  margin-left: 0.02em;
+}
+
+/* Desktop links */
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.nav-links a {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--color-text);
+  position: relative;
+  padding-bottom: 3px;
+  transition: color var(--ease-fast);
+}
+
+/* Animated underline */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent-2);
+  border-radius: var(--radius-pill);
+  transition: width var(--ease-base);
+}
+
+.nav-links a:hover {
+  color: var(--color-accent);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hamburger button — hidden on desktop */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 20px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.hamburger .bar {
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  background-color: var(--color-text);
+  border-radius: 2px;
+  transition:
+    transform var(--ease-base),
+    opacity   var(--ease-base);
+}
+
+/* Animate bars into an × when open */
+.hamburger.is-open .bar:nth-child(1) { transform: translateY(8.75px) rotate(45deg); }
+.hamburger.is-open .bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.is-open .bar:nth-child(3) { transform: translateY(-8.75px) rotate(-45deg); }
+
+
+/* ----------------------------------------------------------
+   8. Mobile navigation
+   ---------------------------------------------------------- */
+@media (max-width: 720px) {
+  .hamburger {
+    display: flex;
+  }
+
+  /* The list collapses to height 0 by default */
+  .nav-links {
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background-color: var(--color-bg);
+    box-shadow: 0 10px 30px rgba(45, 45, 45, 0.1);
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 var(--space-md);
+    transition:
+      max-height 0.4s ease,
+      padding    var(--ease-base);
+  }
+
+  /* JS adds .is-open to expand it */
+  .nav-links.is-open {
+    max-height: 320px;
+    padding: var(--space-sm) var(--space-md) var(--space-md);
+  }
+
+  .nav-links li {
+    padding-block: 0.8rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .nav-links li:first-child {
+    border-top: none;
+  }
+
+  /* Hide underline animation on mobile — not needed */
+  .nav-links a::after {
+    display: none;
+  }
+}
+
+
+/* ----------------------------------------------------------
+   9. Hero Section
+   ---------------------------------------------------------- */
+.hero {
+  background: linear-gradient(150deg, var(--color-bg) 0%, #f5ede1 55%, #ecdcc8 100%);
+  padding-top: var(--space-xl);
+  padding-bottom: 0; /* stats bar handles bottom padding */
+}
+
+/* Two-column layout on desktop */
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--space-lg);
+  padding-bottom: var(--space-xl);
+}
+
+/* --- Hero text (left column) --- */
+.hero-label {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background-color: var(--color-accent-pale);
+  border: 1px solid rgba(193, 103, 74, 0.2);
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--space-sm);
+}
+
+.hero-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.875rem, 3.75vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin-bottom: 1.25rem;
+}
+
+.hero-tagline {
+  font-size: 1.125rem;
+  font-style: italic;
+  font-family: var(--font-heading);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+  max-width: 420px;
+}
+
+/* Button group */
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* --- Hero photo (right column) --- */
+.hero-photo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* The actual circle */
+.hero-photo {
+  width: clamp(200px, 30vw, 340px);
+  height: clamp(200px, 30vw, 340px);
+  border-radius: 50%;
+  background-color: #e8c4b2;
+  border: 5px solid var(--color-accent-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  /* Subtle inner shadow */
+  box-shadow:
+    inset 0 4px 20px rgba(193, 103, 74, 0.12),
+    0 20px 60px rgba(193, 103, 74, 0.18);
+}
+
+.hero-photo span {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  text-align: center;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+/* Decorative ring behind the photo */
+.hero-photo-ring {
+  position: absolute;
+  width: clamp(220px, 33vw, 370px);
+  height: clamp(220px, 33vw, 370px);
+  border-radius: 50%;
+  border: 2px dashed rgba(193, 103, 74, 0.22);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* --- Stats bar below hero --- */
+.hero-stats {
+  /* Warm terracotta-to-coral gradient — carries the hero warmth downward */
+  background: linear-gradient(110deg, #b85c40 0%, #c96b4f 45%, #d97d62 100%);
+  border-top: none;
+}
+
+.stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding-block: calc(var(--space-md) + 0.5rem);
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-sm) var(--space-md);
+}
+
+.stat-number {
+  font-family: var(--font-heading);
+  font-size: clamp(2.25rem, 4.5vw, 3.25rem); /* larger and more impactful */
+  font-weight: 700;
+  color: var(--color-white);                  /* white pops on the warm bg */
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.stat-label {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 160px;
+  letter-spacing: 0.02em;
+}
+
+/* Vertical dividers between stats */
+.stat-divider {
+  width: 1px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.25); /* subtle on the coloured bg */
+  flex-shrink: 0;
+}
+
+
+/* ----------------------------------------------------------
+   10. Projects Section
+   ---------------------------------------------------------- */
+.projects-section {
+  background-color: var(--color-bg);
+  padding-block: var(--space-xl);
+}
+
+/* Each project is a horizontal row */
+.project-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--space-lg);
+  padding-block: var(--space-lg);
+  /* Separator line between rows */
+  border-bottom: 1px solid var(--color-border);
+}
+
+.project-row:last-of-type {
+  border-bottom: none;
+}
+
+/* Reversed row: visually swap image to the right */
+.project-row--reversed {
+  direction: rtl; /* flip column order */
+}
+
+/* Reset text direction inside reversed row */
+.project-row--reversed .project-content,
+.project-row--reversed .project-image {
+  direction: ltr;
+}
+
+/* --- Image side --- */
+.project-image {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(45, 45, 45, 0.1);
+  /* Enforce a consistent aspect ratio so placeholders and real
+     screenshots both take up the same space */
+  aspect-ratio: 16 / 10;
+}
+
+/* Real screenshot — when you swap in an <img> later */
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.project-row:hover .project-image img {
+  transform: scale(1.03);
+}
+
+/* ---- CSS placeholder boxes --------------------------------
+   Used until real screenshots are available.
+   Each variant gets its own gradient; shared structure below.
+   ---------------------------------------------------------- */
+
+/* Shared placeholder layout */
+.project-placeholder {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Clip the decorative circles that bleed outside */
+  overflow: hidden;
+}
+
+/* Gradient variant 1 — terracotta → coral (warm diagonal) */
+.project-placeholder--1 {
+  background: linear-gradient(135deg, #c1674a 0%, #e8836a 55%, #f0a882 100%);
+}
+
+/* Gradient variant 2 — coral → amber (lighter, peachy) */
+.project-placeholder--2 {
+  background: linear-gradient(135deg, #d4754f 0%, #e89a5a 50%, #f2b97a 100%);
+}
+
+/* Gradient variant 3 — deep terracotta → dusty rose */
+.project-placeholder--3 {
+  background: linear-gradient(135deg, #b05540 0%, #cc7060 50%, #e09070 100%);
+}
+
+/* Centred content: icon + label */
+.placeholder-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 1; /* sit above the decorative circles */
+  padding: var(--space-md);
+  text-align: center;
+}
+
+/* SVG icon */
+.placeholder-icon {
+  width: 56px;
+  height: 56px;
+  fill: rgba(255, 255, 255, 0.9);
+  stroke: rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+}
+
+/* Label text beneath the icon */
+.placeholder-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Decorative semi-transparent circles — one top-left, one bottom-right */
+.placeholder-circle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.placeholder-circle--tl {
+  width: 180px;
+  height: 180px;
+  top: -60px;
+  left: -60px;
+}
+
+.placeholder-circle--br {
+  width: 240px;
+  height: 240px;
+  bottom: -80px;
+  right: -80px;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Subtle scale on row hover — mirrors the img behaviour */
+.project-row:hover .project-placeholder {
+  filter: brightness(1.04);
+  transition: filter 0.5s ease;
+}
+
+/* --- Text side --- */
+.project-category {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background-color: var(--color-accent-pale);
+  border: 1px solid rgba(193, 103, 74, 0.2);
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 1rem;
+}
+
+.project-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.project-description {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  margin-bottom: var(--space-md);
+  max-width: 520px;
+}
+
+
+/* ----------------------------------------------------------
+   11. About Section
+   ---------------------------------------------------------- */
+.about-section {
+  background-color: var(--color-bg-alt);
+  padding-block: var(--space-xl);
+}
+
+/* Two-column grid */
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+/* --- Photo (left) --- */
+.about-photo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.about-photo {
+  width: clamp(180px, 26vw, 300px);
+  height: clamp(180px, 26vw, 300px);
+  border-radius: 50%;
+  background-color: #e8c4b2;
+  border: 4px solid var(--color-accent-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 16px 50px rgba(193, 103, 74, 0.16);
+}
+
+.about-photo span {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Organic blob shape behind the photo — pure CSS */
+.about-photo-blob {
+  position: absolute;
+  width: clamp(210px, 30vw, 340px);
+  height: clamp(210px, 30vw, 340px);
+  background-color: rgba(193, 103, 74, 0.08);
+  border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+/* --- Text (right) --- */
+.about-text .section-heading {
+  margin-top: 0.25rem;
+}
+
+.about-body {
+  font-size: 1.0625rem;
+  color: var(--color-text-muted);
+  line-height: 1.85;
+  margin-bottom: var(--space-sm);
+  max-width: 560px;
+}
+
+.about-body:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ----------------------------------------------------------
+   12. Skills Section
+   ---------------------------------------------------------- */
+.skills-section {
+  background-color: var(--color-bg);
+  padding-block: var(--space-xl);
+}
+
+/* Wrapping flex row of pill badges */
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem;
+  margin-top: var(--space-xs);
+}
+
+.skill-badge {
+  display: inline-block;
+  padding: 0.55rem 1.375rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  cursor: default;
+  transition:
+    transform   var(--ease-fast),
+    box-shadow  var(--ease-fast);
+}
+
+.skill-badge:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(193, 103, 74, 0.2);
+}
+
+/* Cycle through three warm colour variants */
+.skill-badge:nth-child(3n + 1) {
+  background-color: #fbeae4;
+  color: #a84e33;
+  border: 1.5px solid rgba(193, 103, 74, 0.25);
+}
+
+.skill-badge:nth-child(3n + 2) {
+  background-color: #fdf2e7;
+  color: #b36020;
+  border: 1.5px solid rgba(179, 96, 32, 0.22);
+}
+
+.skill-badge:nth-child(3n) {
+  background-color: #fde8e3;
+  color: #9e3e26;
+  border: 1.5px solid rgba(158, 62, 38, 0.2);
+}
+
+
+/* ----------------------------------------------------------
+   13. Contact Section
+   ---------------------------------------------------------- */
+.contact-section {
+  background-color: var(--color-bg-alt);
+  padding-block: var(--space-xl);
+}
+
+.contact-container {
+  max-width: 680px;
+}
+
+.contact-subtext {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-family: var(--font-heading);
+  margin-top: -0.75rem;   /* pull up closer to the heading */
+  margin-bottom: var(--space-md);
+}
+
+/* Row of three CTA buttons */
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.contact-btn {
+  /* Make them a bit taller for emphasis */
+  padding: 0.9rem 2rem;
+}
+
+
+/* ----------------------------------------------------------
+   14. Footer
+   ---------------------------------------------------------- */
+.site-footer {
+  background-color: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+  padding-block: var(--space-md);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.footer-name {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.footer-copy {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+
+/* ----------------------------------------------------------
+   15. Responsive — tablet breakpoint (≤ 900px)
+   ---------------------------------------------------------- */
+@media (max-width: 900px) {
+
+  /* Hero stacks vertically, photo moves above text on tablet */
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: var(--space-md);
+  }
+
+  .hero-text {
+    order: 2; /* text below photo */
+  }
+
+  .hero-photo-wrap {
+    order: 1;
+  }
+
+  .hero-tagline {
+    margin-inline: auto;
+  }
+
+  .hero-ctas {
+    justify-content: center;
+  }
+
+  /* Stack project rows */
+  .project-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  /* Reset the directional flip on small screens */
+  .project-row--reversed {
+    direction: ltr;
+  }
+
+  /* Put image above text in all project rows */
+  .project-image {
+    order: -1;
+  }
+
+  /* Stack about section */
+  .about-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .about-photo-wrap {
+    order: -1; /* photo first */
+  }
+
+  .about-body {
+    margin-inline: auto;
+  }
+
+  /* Stack stats on smaller tablets */
+  .stats-row {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .stat-divider {
+    width: 48px;
+    height: 1px;
+  }
+}
+
+
+/* ----------------------------------------------------------
+   16. Responsive — mobile breakpoint (≤ 480px)
+   ---------------------------------------------------------- */
+@media (max-width: 480px) {
+  :root {
+    --space-xl: 4rem;
+    --space-lg: 2.5rem;
+  }
+
+  .hero-photo {
+    width: 200px;
+    height: 200px;
+  }
+
+  .section-heading {
+    font-size: 1.875rem;
+  }
+
+  .contact-links {
+    flex-direction: column;
+  }
+
+  .contact-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+
+/* ----------------------------------------------------------
+   17. Accessibility — respect reduced-motion preference
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Show all elements immediately — no animation */
+  .animate-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  /* Remove hover transforms */
+  .btn:hover,
+  .skill-badge:hover,
+  .project-row:hover .project-image img,
+  .project-row:hover .project-placeholder {
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}

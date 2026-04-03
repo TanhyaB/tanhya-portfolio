@@ -59,7 +59,7 @@
         </h1>
 
         <p class="cs-hero-subtitle animate-on-scroll">
-          How I built a real-time feedback dashboard from scratch — and ran it solo for 9 months
+          How I built a real-time feedback dashboard from scratch, and ran it solo for 9 months
         </p>
 
         <!-- Meta row: role / timeline / tools -->
@@ -147,7 +147,7 @@
 
         <p class="cs-body animate-on-scroll">
           AAT had no way to track what customers were experiencing on their website in real time.
-          Feedback was either lost or collected manually using spreadsheets — slow, inconsistent,
+          Feedback was either lost or collected manually using spreadsheets, slow, inconsistent,
           and hard to act on. There was no system, no dashboard, and no process. I was brought in
           to fix that from scratch.
         </p>
@@ -161,6 +161,16 @@
             all while managing other UX projects.
           </p>
         </aside>
+
+        <p class="cs-body animate-on-scroll">
+          The dashboard had four main users, each with different needs. The Insights Lead and Junior
+          UX Designer used it for monthly reporting, the Junior Designer pulls data from it to create
+          a report that goes to platform managers, and it also feeds into a wider pillar report seen
+          by the leadership team. The CX Manager used it to track ongoing experience issues. The CX
+          Director needed quick, clear answers, especially around NPS. Designing for four different
+          people with four different goals meant I had to think carefully about what each page showed
+          and why.
+        </p>
 
       </div>
     </section>
@@ -202,7 +212,7 @@
             For 9 months I ran everything manually because stakeholders needed insights straight away.
             Every month I would export around 150 new responses, clean and process the data in Excel,
             use CoPilot to categorise themes, update the master spreadsheet, create an insights report,
-            and present findings to stakeholders. It was time consuming — but it proved the value of
+            and present findings to stakeholders. It was time consuming, but it proved the value of
             the system and built buy-in for automation.
           </p>
         </div>
@@ -273,6 +283,14 @@
         <h2 id="s-architecture" class="cs-heading animate-on-scroll">The 6-Page Dashboard</h2>
 
         <p class="cs-body animate-on-scroll">
+          The six pages aren't random, they're grouped around the types of insight each user
+          actually needs. For example, the CX Director tracked NPS closely, but they didn't just
+          want a number. They needed to understand what was driving it, so I connected NPS to
+          sentiment and task completion data on the same page. That way, they could see the full
+          picture in one place without digging around.
+        </p>
+
+        <p class="cs-body animate-on-scroll">
           Each page was designed for a different audience and decision-making need:
         </p>
 
@@ -310,7 +328,7 @@
               <span class="cs-dashboard-num">05</span>
               <span class="cs-dashboard-title">Themes &amp; Opportunities</span>
             </div>
-            <p class="cs-dashboard-desc">Feedback categorised by theme with frequency counts to help prioritise fixes.</p>
+            <p class="cs-dashboard-desc">This page is still in progress. Currently, themes are identified manually using Excel and CoPilot, and supported by insights from other dashboard pages, such as Task Intent and NPS. Fully integrating this into the dashboard is the next priority.</p>
           </li>
           <li class="cs-dashboard-item">
             <div class="cs-dashboard-left">
@@ -326,32 +344,55 @@
 
 
     <!-- =====================================================
-         SECTION 5 — Real Impact
+         SECTION 5 — Design Decisions
          ===================================================== -->
-    <section class="cs-section" aria-labelledby="s-impact">
+    <section class="cs-section" aria-labelledby="s-design-decisions">
+      <div class="container cs-content">
+
+        <h2 id="s-design-decisions" class="cs-heading animate-on-scroll">Design Decisions</h2>
+
+        <p class="cs-body animate-on-scroll">A few things I had to figure out as I went:</p>
+
+        <ul class="cs-list animate-on-scroll" aria-label="Design decisions">
+          <li>I kept the layout simple on purpose. Stakeholders weren't data experts, so I stripped out anything that would confuse rather than help.</li>
+          <li>I tested early versions with the people who'd actually use it. For example, the Junior UX Designer needed to quickly pull specific data for her monthly report, so I made sure the filters made it as easy as possible.</li>
+          <li>I made sure filters were easy to find so stakeholders could answer their own questions without coming back to me every time.</li>
+        </ul>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         SECTION 6 — Real Impact
+         ===================================================== -->
+    <section class="cs-section cs-section--alt" aria-labelledby="s-impact">
       <div class="container cs-content">
 
         <h2 id="s-impact" class="cs-heading animate-on-scroll">Real Impact</h2>
 
         <p class="cs-body animate-on-scroll">
-          The dashboard doesn't just report data — it drives real fixes.
+          The dashboard doesn't just report data, it drives real fixes.
         </p>
 
         <!-- Callout box -->
         <aside class="cs-callout animate-on-scroll" aria-label="400 Error Crisis example">
           <p class="cs-callout-title">Example: 400 Error Crisis</p>
           <p class="cs-callout-body">
-            The dashboard flagged a high volume of 400 errors on the learning portal — a critical page
-            for students trying to access study materials. I raised this with the platform manager who
-            worked with the third-party platform owners. Errors were reduced and the IT team put
-            workarounds in place, directly improving the student experience.
+            The dashboard flagged a high volume of 400 errors on the learning portal, a critical page
+            for students trying to access study materials. I raised this with the platform manager,
+            who worked with the third-party platform owners. Errors were reduced, and the IT team
+            implemented workarounds, directly improving the student experience.
           </p>
         </aside>
 
         <p class="cs-body animate-on-scroll">
-          Other impacts include identifying confusing navigation patterns (which led to my Quick Links
-          project), spotting registration funnel drop-offs, and surfacing content clarity issues
-          across the site.
+          The manual theme analysis, done in Excel alongside the dashboard, yielded some of the
+          biggest insights. For example, navigation frustration showed up repeatedly across multiple
+          responses. Cross-referencing this with the Task Intent page confirmed that task completion
+          was low in key areas. This directly led to my Quick Links project, where I surfaced
+          important pages more prominently. Those pages drive revenue, so getting customers there
+          faster had a real commercial impact.
         </p>
 
       </div>
@@ -381,7 +422,7 @@
           </li>
           <li class="cs-learnings-item">
             <strong class="cs-learnings-phrase">Insights need action</strong>
-            <span class="cs-learnings-desc">Data means nothing without a framework that drives actual platform fixes.</span>
+            <span class="cs-learnings-desc">Data means nothing without a framework that drives actual platform fixes. The manual theme analysis was the clearest example of this, spotting that navigation was a top frustration led directly to a separate project that improved how customers find revenue-driving pages on the site.</span>
           </li>
         </ul>
 

@@ -162,6 +162,45 @@ function initScrollAnimations() {
 
 
 /* ============================================================
+   5. Masonry grid — set grid-row-end span per image
+   ============================================================
+   The grid uses grid-auto-rows: 10px. After each image loads
+   we measure its rendered height and calculate how many 10px
+   rows it should span so all columns fill evenly to the bottom.
+   ============================================================ */
+function initMasonryGrid() {
+  const grid = document.querySelector('.about-pg-masonry');
+  if (!grid) return;
+
+  function spanItem(img) {
+    const styles    = window.getComputedStyle(grid);
+    const rowHeight = parseInt(styles.getPropertyValue('grid-auto-rows'), 10);
+    const rowGap    = parseInt(styles.getPropertyValue('row-gap'), 10) || 0;
+    const height    = img.getBoundingClientRect().height;
+    if (!height) return;
+    const span = Math.ceil((height + rowGap) / (rowHeight + rowGap));
+    img.style.gridRowEnd = `span ${span}`;
+  }
+
+  function spanAll() {
+    grid.querySelectorAll('.about-pg-masonry-img').forEach(spanItem);
+  }
+
+  // Span each image as it loads; also handle already-cached images
+  grid.querySelectorAll('.about-pg-masonry-img').forEach(img => {
+    if (img.complete && img.naturalHeight > 0) {
+      spanItem(img);
+    } else {
+      img.addEventListener('load', () => spanItem(img));
+    }
+  });
+
+  // Recalculate on window resize (column widths change → heights change)
+  window.addEventListener('resize', spanAll, { passive: true });
+}
+
+
+/* ============================================================
    Init — wire everything up after the DOM is ready
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
@@ -173,4 +212,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initSmoothScroll(closeMobileNav);
   initScrollAnimations();
+  initMasonryGrid();
 });

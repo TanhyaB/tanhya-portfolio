@@ -643,6 +643,18 @@ section[id] {
   transform: scale(1.03);
 }
 
+/* Variant: show full image without cropping */
+.project-image--contain {
+  background-color: #FAF7F2;
+  padding: 1rem;
+  border: 1px solid #E8DDD4;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.project-image--contain img {
+  object-fit: contain;
+}
+
 /* ---- CSS placeholder boxes --------------------------------
    Used until real screenshots are available.
    Each variant gets its own gradient; shared structure below.

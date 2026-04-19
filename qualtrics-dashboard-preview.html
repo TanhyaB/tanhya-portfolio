@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NPS Insights and Drivers</title>
+<script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 12px;
+    background: #f4f4f4;
+    color: #333;
+    width: 800px;
+  }
+
+  /* ── Top nav ── */
+  .top-nav {
+    background: #1a1a2e;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    height: 34px;
+    font-size: 11px;
+    gap: 8px;
+  }
+  .top-nav .logo {
+    font-weight: 700;
+    color: #fff;
+    font-size: 13px;
+    margin-right: 4px;
+  }
+  .top-nav .breadcrumb { color: #aaa; }
+  .top-nav .breadcrumb span { color: #ccc; }
+  .top-nav .spacer { flex: 1; }
+  .top-nav .nav-icons { display: flex; gap: 10px; color: #aaa; font-size: 14px; }
+
+  /* ── Sub nav ── */
+  .sub-nav {
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 6px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sub-nav .page-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111;
+  }
+  .sub-nav .badge {
+    background: #e8f0fe;
+    color: #3c5bca;
+    border-radius: 10px;
+    padding: 1px 7px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  /* ── Filter bar ── */
+  .filter-bar {
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 5px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    color: #555;
+  }
+  .filter-btn {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 3px 8px;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #333;
+  }
+  .filter-bar .date-range { color: #3c5bca; font-weight: 500; }
+  .filter-bar .reset { color: #3c5bca; cursor: pointer; margin-left: auto; }
+
+  /* ── Page intro ── */
+  .page-intro {
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 10px 20px;
+    text-align: center;
+  }
+  .page-intro h2 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 4px;
+  }
+  .page-intro p {
+    font-size: 11px;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 2px;
+  }
+  .page-intro p strong { font-weight: 600; color: #222; }
+
+  /* ── Section header ── */
+  .section-header {
+    background: #fff9f0;
+    border-left: 3px solid #e07000;
+    margin: 8px 12px 6px;
+    padding: 6px 10px;
+    border-radius: 2px;
+  }
+  .section-header h3 {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #b85c00;
+  }
+  .section-header p {
+    font-size: 10px;
+    color: #666;
+    margin-top: 2px;
+    line-height: 1.45;
+  }
+
+  /* ── Metric cards row ── */
+  .metrics-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin: 0 12px 8px;
+  }
+  .metric-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 10px 10px 8px;
+  }
+  .metric-card .card-title {
+    font-size: 10px;
+    color: #555;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-bottom: 6px;
+  }
+  .metric-card .card-title .info { color: #aaa; font-size: 11px; }
+  .metric-card .big-number {
+    font-size: 34px;
+    font-weight: 300;
+    color: #111;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .metric-card .change {
+    font-size: 10px;
+    color: #2a8c4a;
+    font-weight: 500;
+  }
+  .metric-card .change.negative { color: #c0392b; }
+  .metric-card .card-desc-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: #222;
+    margin-top: 8px;
+    margin-bottom: 3px;
+  }
+  .metric-card .card-desc {
+    font-size: 9.5px;
+    color: #666;
+    line-height: 1.5;
+  }
+  .metric-card .card-desc ul {
+    padding-left: 12px;
+    margin: 3px 0;
+  }
+  .metric-card .card-desc li { margin-bottom: 2px; }
+
+  /* NPS gauge */
+  .nps-gauge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .nps-gauge .big-number { font-size: 38px; font-weight: 300; }
+  .nps-gauge .change { font-size: 10px; color: #2a8c4a; }
+
+  /* NPS bar chart */
+  .bar-chart { margin-top: 4px; }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 5px;
+    font-size: 10px;
+  }
+  .bar-label { width: 52px; color: #555; text-align: right; flex-shrink: 0; }
+  .bar-track { flex: 1; background: #f0f0f0; border-radius: 2px; height: 12px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 2px; }
+  .bar-val { width: 24px; color: #333; font-weight: 600; text-align: right; flex-shrink: 0; }
+  .promoter-bar { background: #8b5cf6; }
+  .passive-bar { background: #22c55e; }
+  .detractor-bar { background: #3b82f6; }
+
+  /* Donut */
+  .donut-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4px 0 6px;
+    position: relative;
+  }
+  .donut-wrap svg { display: block; }
+  .donut-center {
+    position: absolute;
+    text-align: center;
+  }
+  .donut-center .d-num { font-size: 22px; font-weight: 300; color: #111; }
+  .donut-center .d-lbl { font-size: 9px; color: #888; }
+
+  /* ── Charts row ── */
+  .charts-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin: 0 12px 8px;
+  }
+  .chart-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 10px;
+  }
+  .chart-card .card-title {
+    font-size: 10px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .chart-card .card-desc-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: #222;
+    margin-top: 8px;
+    margin-bottom: 3px;
+  }
+  .chart-card .card-desc {
+    font-size: 9.5px;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  /* Horizontal bar chart (likert) */
+  .likert-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 4px;
+    font-size: 9.5px;
+  }
+  .likert-label { width: 60px; color: #555; text-align: right; flex-shrink: 0; }
+  .likert-bars { flex: 1; display: flex; gap: 1px; height: 10px; }
+  .likert-seg { border-radius: 1px; height: 100%; }
+  .l-purple { background: #8b5cf6; }
+  .l-green  { background: #22c55e; }
+  .l-teal   { background: #0ea5e9; }
+  .l-orange { background: #f97316; }
+  .l-red    { background: #ef4444; }
+  .likert-pct { width: 28px; text-align: right; color: #333; font-weight: 600; }
+
+  /* ── Bottom tables row ── */
+  .tables-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin: 0 12px 10px;
+  }
+  .table-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 8px;
+    overflow: hidden;
+  }
+  .table-card .card-title {
+    font-size: 10px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 9.5px; }
+  th {
+    background: #f8f8f8;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 3px 5px;
+    text-align: left;
+    color: #555;
+    font-weight: 600;
+  }
+  td {
+    padding: 4px 5px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  .det-col { color: #c0392b; font-weight: 600; }
+  .pro-col { color: #8b5cf6; font-weight: 600; }
+  .pas-col { color: #22c55e; font-weight: 600; }
+  .link { color: #3c5bca; font-size: 8.5px; }
+  .table-desc {
+    font-size: 9.5px;
+    color: #666;
+    margin-top: 5px;
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+
+<!-- Top nav -->
+<div class="top-nav">
+  <span class="logo">XM</span>
+  <span class="breadcrumb">Test Exit Survey Dashboard › <span>Exit survey insights overview</span></span>
+  <div class="spacer"></div>
+  <div class="nav-icons">
+    <span>⊘</span><span>🔔</span><span>⚙</span><span>👤</span>
+  </div>
+</div>
+
+<!-- Sub nav -->
+<div class="sub-nav">
+  <span class="page-title">NPS insights</span>
+  <span class="badge">3 of 7 ∨</span>
+</div>
+
+<!-- Filter bar -->
+<div class="filter-bar">
+  <span class="filter-btn">▼ Filters</span>
+  <span>Survey Metadata · Start Date: <span class="date-range">Jan 1, 2026 to Mar 31, 2026 ∨</span></span>
+  <span class="reset">Reset to Default</span>
+</div>
+
+<!-- Page intro -->
+<div class="page-intro">
+  <h2>NPS insights and drivers</h2>
+  <p>This page provides a clear view of how NPS is performing in the selected time period, and what is driving changes in customer advocacy.</p>
+  <p><strong>Section 1</strong> shows NPS, drivers, sentiment and verbatims for the filtered period.</p>
+  <p><strong>Section 2</strong> shows long-term trends that do not change when filters are applied.</p>
+  <p style="margin-top:4px;">Together, these two views enable you to understand both monthly performance and long-term movement.</p>
+</div>
+
+<!-- Section 1 header -->
+<div class="section-header">
+  <h3>Section 1 – NPS performance for the selected date range.</h3>
+  <p>These widgets update when the date filter is applied.<br>
+  Use it to understand how NPS performed in the selected period, what influenced it, and what users said about their experience.</p>
+</div>
+
+<!-- Metric cards -->
+<div class="metrics-row">
+
+  <!-- NPS score -->
+  <div class="metric-card">
+    <div class="card-title">Net Promoter Score (NPS) ⓘ</div>
+    <div class="nps-gauge">
+      <div class="big-number">42</div>
+      <div class="change">▲ +3 over previous week</div>
+    </div>
+    <div class="card-desc-title">What is NPS?</div>
+    <div class="card-desc">
+      NPS measures customer loyalty by asking how likely someone is to recommend us on a 0–10 scale.<br>
+      <ul>
+        <li>Promoters (9–10) = Strong advocates</li>
+        <li>Passives (7–8) = Neutral</li>
+        <li>Detractors (0–6) = Dissatisfied</li>
+      </ul>
+      <strong>Calculation:</strong> NPS = % Promoters – % Detractors
+    </div>
+  </div>
+
+  <!-- NPS group breakdown -->
+  <div class="metric-card">
+    <div class="card-title">NPS group breakdown ⓘ</div>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <span class="bar-label">Promoters</span>
+        <div class="bar-track"><div class="bar-fill promoter-bar" style="width:54%"></div></div>
+        <span class="bar-val">54</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Passives</span>
+        <div class="bar-track"><div class="bar-fill passive-bar" style="width:38%"></div></div>
+        <span class="bar-val">38</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Detractors</span>
+        <div class="bar-track"><div class="bar-fill detractor-bar" style="width:21%"></div></div>
+        <span class="bar-val">21</span>
+      </div>
+    </div>
+    <div class="card-desc-title">NPS group breakdown</div>
+    <div class="card-desc">
+      This breakdown shows how responses are distributed across Promoters, Passives and Detractors. Changes in this mix often explain shifts in the overall NPS score.
+    </div>
+  </div>
+
+  <!-- Task completion -->
+  <div class="metric-card">
+    <div class="card-title">Task completion (count) ⓘ ▽</div>
+    <div class="donut-wrap" style="height:70px;">
+      <svg width="70" height="70" viewBox="0 0 70 70">
+        <circle cx="35" cy="35" r="28" fill="none" stroke="#f0f0f0" stroke-width="9"/>
+        <circle cx="35" cy="35" r="28" fill="none" stroke="#e07000" stroke-width="9"
+          stroke-dasharray="117 58" stroke-linecap="round"
+          transform="rotate(-90 35 35)"/>
+      </svg>
+      <div class="donut-center">
+        <div class="d-num">67</div>
+        <div class="d-lbl">Count</div>
+      </div>
+    </div>
+    <div class="card-desc-title">Task completion (count)</div>
+    <div class="card-desc">
+      Task completion is one of the strongest predictors of NPS.<br>
+      • More successful tasks = higher NPS<br>
+      • Fewer successful tasks = increased detractor behaviour<br>
+      Compare this number with total responses to gauge the proportion of successful journeys.
+    </div>
+  </div>
+
+  <!-- Total responses -->
+  <div class="metric-card">
+    <div class="card-title">Total responses (selected date range) ⓘ</div>
+    <div class="big-number" style="font-size:34px;margin-bottom:4px;">312</div>
+    <div class="change">▲ +28 over previous week</div>
+    <div class="card-desc-title">Total responses (selected date range)</div>
+    <div class="card-desc">
+      Use this number to understand the volume of feedback for the period and compare against counts shown in other metrics.
+    </div>
+  </div>
+
+</div>
+
+<!-- Charts row -->
+<div class="charts-row">
+
+  <!-- Ease of finding info -->
+  <div class="chart-card">
+    <div class="card-title">Ease of finding information (Q5) ⓘ</div>
+    <div class="likert-row">
+      <span class="likert-label">Very difficult</span>
+      <div class="likert-bars"><div class="likert-seg l-red" style="width:6%"></div></div>
+      <span class="likert-pct">6%</span>
+    </div>
+    <div class="likert-row">
+      <span class="likert-label">Difficult</span>
+      <div class="likert-bars"><div class="likert-seg l-orange" style="width:11%"></div></div>
+      <span class="likert-pct">11%</span>
+    </div>
+    <div class="likert-row">
+      <span class="likert-label">Neutral</span>
+      <div class="likert-bars"><div class="likert-seg l-teal" style="width:18%"></div></div>
+      <span class="likert-pct">18%</span>
+    </div>
+    <div class="likert-row">
+      <span class="likert-label">Easy</span>
+      <div class="likert-bars"><div class="likert-seg l-green" style="width:38%"></div></div>
+      <span class="likert-pct">38%</span>
+    </div>
+    <div class="likert-row">
+      <span class="likert-label">Very easy</span>
+      <div class="likert-bars"><div class="likert-seg l-purple" style="width:27%"></div></div>
+      <span class="likert-pct">27%</span>
+    </div>
+    <div class="card-desc-title">Ease of finding information</div>
+    <div class="card-desc">Difficulty finding information is one of the top contributions to detractor scores. Monitor low ratings here to identify navigation issues.</div>
+  </div>
+
+  <!-- Clarity of information -->
+  <div class="chart-card">
+    <div class="card-title">Clarity of information (Q5-3) ⓘ</div>
+    <div class="likert-row">
+      <span class="likert-label">Not clear</span>
+      <div class="likert-bars"><div class="likert-seg l-red" style="width:5%"></div></div>
+      <span class="likert-pct">5%</span>
+    </div>
+    <div class="likert-row">
+      <span class="likert-label">Unclear</span>
+      <div class="likert-bars"><div class="likert-seg l-orange" style="width:9%"></div></div>
+      <span class="likert-pct">9%</span>
+    </div>
+    <div class="likert-row">
+      <span class="likert-label">Neutral</span>
+      <div class="likert-bars"><div class="likert-seg l-teal" style="width:20%"></div></div>
+      <span class="likert-pct">20%</span>
+    </div>
+    <div class="likert-row">
+      <span class="likert-label">Clear</span>
+      <div class="likert-bars"><div class="likert-seg l-green" style="width:40%"></div></div>
+      <span class="likert-pct">40%</span>
+    </div>
+    <div class="likert-row">
+      <span class="likert-label">Very clear</span>
+      <div class="likert-bars"><div class="likert-seg l-purple" style="width:26%"></div></div>
+      <span class="likert-pct">26%</span>
+    </div>
+    <div class="card-desc-title">Clarity of information</div>
+    <div class="card-desc">Clear information supports confident decision-making. Lower clarity creates confusion and increases customer effort, often lowering NPS.</div>
+  </div>
+
+  <!-- Effort rating -->
+  <div class="chart-card">
+    <div class="card-title">Effort rating ⓘ</div>
+    <div class="likert-row">
+      <span class="likert-label">Very easy</span>
+      <div class="likert-bars"><div class="likert-seg l-purple" style="width:22%"></div></div>
+      <span class="likert-pct">22%</span>
+    </div>
+    <div class="likert-row">
+      <span class="likert-label">Easy</span>
+      <div class="likert-bars"><div class="likert-seg l-green" style="width:35%"></div></div>
+      <span class="likert-pct">35%</span>
+    </div>
+    <div class="likert-row">
+      <span class="likert-label">Neutral</span>
+      <div class="likert-bars"><div class="likert-seg l-teal" style="width:24%"></div></div>
+      <span class="likert-pct">24%</span>
+    </div>
+    <div class="likert-row">
+      <span class="likert-label">Hard</span>
+      <div class="likert-bars"><div class="likert-seg l-orange" style="width:13%"></div></div>
+      <span class="likert-pct">13%</span>
+    </div>
+    <div class="likert-row">
+      <span class="likert-label">Very hard</span>
+      <div class="likert-bars"><div class="likert-seg l-red" style="width:6%"></div></div>
+      <span class="likert-pct">6%</span>
+    </div>
+    <div class="card-desc-title">Effort rating</div>
+    <div class="card-desc">Higher effort directly contributes to detractor behaviour. Look for spikes in 'Hard' and 'Very Hard' responses when NPS declines.</div>
+  </div>
+
+</div>
+
+<!-- Bottom tables -->
+<div class="tables-row">
+
+  <!-- NPS by sentiment -->
+  <div class="table-card">
+    <div class="card-title">NPS by sentiment ⓘ</div>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Very Positive</th>
+          <th>Positive</th>
+          <th>Neutral</th>
+          <th>Mixed</th>
+          <th>Negative</th>
+          <th>Very Negative</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="pro-col">Promoter</td>
+          <td>14</td><td>12</td><td>3</td><td>2</td><td>1</td><td>—</td>
+        </tr>
+        <tr>
+          <td class="pas-col">Passive</td>
+          <td>4</td><td>5</td><td>4</td><td>5</td><td>—</td><td>—</td>
+        </tr>
+        <tr>
+          <td class="det-col">Detractor</td>
+          <td>—</td><td>1</td><td>2</td><td>3</td><td>4</td><td>2</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-desc">This table shows how changes in sentiment translates into NPS movement. Increases in negative sentiment often precede a drop in NPS.</div>
+  </div>
+
+  <!-- Verbatim feedback -->
+  <div class="table-card">
+    <div class="card-title">Promoter feedback (9–10) ⓘ ▽</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Q4 – What were you trying to do today?</th>
+          <th>Q4 – Why did you give this rating?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>03-01-2026</td>
+          <td>Find enrolment information</td>
+          <td>"The website was easy to navigate and I found what I needed quickly."</td>
+        </tr>
+        <tr>
+          <td>10-01-2026</td>
+          <td>Book an assessment</td>
+          <td>"Everything was clear and straightforward. I was able to complete my task without any issues."</td>
+        </tr>
+        <tr>
+          <td>17-01-2026</td>
+          <td>Check membership options</td>
+          <td>"Really smooth experience. The information was well organised and easy to find."</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-desc">Promoters highlight what is working well. These strengths should be preserved and replicated across the journey.</div>
+  </div>
+
+</div>
+
+</body>
+</html>

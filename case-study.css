@@ -337,40 +337,81 @@
 
 
 /* ----------------------------------------------------------
-   6. Side-by-side image placeholders (Section 3)
+   6. Full-width section image with caption
    ---------------------------------------------------------- */
-.cs-image-pair {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-md);
+
+/* Wrapper — <figure> — stretches to the full content column */
+.cs-image-full {
   margin-top: var(--space-lg);
+  margin-bottom: 0;
 }
 
-/* Individual placeholder in the pair */
-.cs-image-placeholder {
-  aspect-ratio: 4 / 3;
-  border-radius: var(--radius-md);
-  overflow: hidden;
+/* The image itself — styling lives on .cs-image-fade-wrap when the fade wrapper is present */
+.cs-image-full img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background-color: var(--color-bg-alt);
+}
+
+/* Fade-out wrapper — clips the image and adds a gradient overlay at the bottom */
+.cs-image-fade-wrap {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  max-height: 600px;
+  overflow: hidden;
+  /* Pass the rounded corners and shadow through from the parent figure */
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* Slightly different gradient tones to distinguish the two */
-.cs-image-placeholder--a {
-  background: linear-gradient(135deg, #c1674a 0%, #e8836a 55%, #f0a882 100%);
+/* Remove the shadow/radius from the img itself — the wrapper owns them now */
+.cs-image-fade-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: var(--color-bg-alt);
 }
 
-.cs-image-placeholder--b {
-  background: linear-gradient(135deg, #b05540 0%, #cc7060 50%, #e09070 100%);
+/* Fade overlay — sits on top of the image, fades into the page background */
+.cs-image-fade-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, #faf7f2);
+  pointer-events: none; /* don't block clicks/taps on the image */
 }
 
-/* Smaller icon size inside the pair placeholders */
-.placeholder-icon--sm {
-  width: 40px;
-  height: 40px;
+/* On mobile, reduce max-height so the fade still triggers on smaller screens */
+@media (max-width: 480px) {
+  .cs-image-fade-wrap {
+    max-height: 340px;
+  }
+
+  .cs-image-fade-wrap::after {
+    height: 80px;
+  }
 }
+
+/* Caption below the image */
+.cs-image-caption {
+  display: block;
+  margin-top: 0.625rem;
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* Responsive — nothing extra needed; width:100% already handles it */
 
 
 /* ----------------------------------------------------------
@@ -451,10 +492,6 @@
     height: 1px;
   }
 
-  /* Side-by-side images stack */
-  .cs-image-pair {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 480px) {

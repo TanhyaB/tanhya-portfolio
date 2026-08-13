@@ -5,35 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Qualtrics Dashboard — Tanhya Bascombe</title>
 
-  <!-- Same Google Fonts as index.html -->
+  <!-- Fonts: DM Serif Display + Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap"
     rel="stylesheet"
   />
 
-  <!-- Shared stylesheet — same colours, fonts, buttons as index.html -->
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Case-study-specific styles -->
   <link rel="stylesheet" href="case-study.css" />
 </head>
-<body>
+<body class="theme-pink">
 
   <!-- =====================================================
-       NAV — same logo, "← Back to work" instead of section links
+       NAV — logo + back link
        ===================================================== -->
   <header class="nav-wrapper" id="nav">
     <nav class="nav-inner" aria-label="Main navigation">
 
-      <!-- Logo (same markup as index.html) -->
       <a href="index.html" class="nav-logo" aria-label="Tanhya Bascombe — back to portfolio">
-        Tanhya&nbsp;<span class="nav-logo-surname">Bascombe</span><span class="nav-logo-dot" aria-hidden="true">.</span>
+        <svg class="logo-mark" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false">
+          <g class="logo-spinner">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <line x1="12" y1="2"    x2="12" y2="6.5"  stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            <line x1="12" y1="17.5" x2="12" y2="22"   stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            <line x1="2"    y1="12" x2="6.5"  y2="12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            <line x1="17.5" y1="12" x2="22"   y2="12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </g>
+          <circle class="logo-dot" cx="12" cy="12" r="2" fill="#b85c8a"/>
+        </svg>
+        <span class="logo-text">Tanhya Bascombe</span>
       </a>
 
-      <!-- Back link -->
-      <a href="index.html#projects" class="cs-back-link">
+      <a href="index.html#work" class="cs-back-link">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
           <path d="M15 10H5m0 0l4-4m-4 4l4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
         </svg>
@@ -49,31 +54,28 @@
          HERO
          ===================================================== -->
     <section class="cs-hero" aria-label="Case study introduction">
-      <div class="container cs-hero-container">
+      <div class="cs-hero-container">
 
-        <!-- Label + heading + subtitle -->
-        <p class="section-eyebrow animate-on-scroll">Research Operations</p>
+        <p class="section-eyebrow">Research Operations</p>
 
-        <h1 class="cs-hero-heading animate-on-scroll">
+        <h1 class="cs-hero-heading">
           Customer Experience Measurement Programme
         </h1>
 
-        <p class="cs-hero-subtitle animate-on-scroll">
+        <p class="cs-hero-subtitle">
           How I built a real-time feedback dashboard from scratch, and ran it solo for 9 months
         </p>
 
-        <!-- Meta row: role / timeline / tools -->
+        <!-- Meta row -->
         <dl class="cs-meta animate-on-scroll" aria-label="Project metadata">
           <div class="cs-meta-item">
             <dt>Role</dt>
             <dd>Sole UX Designer</dd>
           </div>
-          <div class="cs-meta-divider" aria-hidden="true"></div>
           <div class="cs-meta-item">
             <dt>Timeline</dt>
             <dd>March 2025 – January 2026</dd>
           </div>
-          <div class="cs-meta-divider" aria-hidden="true"></div>
           <div class="cs-meta-item">
             <dt>Tools</dt>
             <dd>Qualtrics, Excel, CoPilot</dd>
@@ -85,7 +87,7 @@
           src="images/qualtrics-overview-hero.png"
           alt="Qualtrics Customer Experience Dashboard — Executive Summary view"
           class="cs-hero-image animate-on-scroll"
-          style="width:100%;height:auto;display:block;border-radius:var(--radius-lg,12px);"
+          style="aspect-ratio:auto; height:auto; border:1px solid var(--border); border-radius:var(--radius-lg);"
         />
 
       </div>
@@ -93,7 +95,7 @@
 
 
     <!-- =====================================================
-         STATS — warm terracotta bar (reuses index.html styles)
+         STATS BAR
          ===================================================== -->
     <div class="hero-stats" aria-label="Key project stats">
       <div class="container stats-row">
@@ -103,14 +105,10 @@
           <span class="stat-label">Exit survey responses</span>
         </div>
 
-        <div class="stat-divider" aria-hidden="true"></div>
-
         <div class="stat animate-on-scroll">
           <span class="stat-number">915</span>
           <span class="stat-label">Feedback button responses</span>
         </div>
-
-        <div class="stat-divider" aria-hidden="true"></div>
 
         <div class="stat animate-on-scroll">
           <span class="stat-number">9 months</span>
@@ -125,7 +123,7 @@
          SECTION 1 — The Problem
          ===================================================== -->
     <section class="cs-section" aria-labelledby="s-problem">
-      <div class="container cs-content">
+      <div class="cs-content">
 
         <h2 id="s-problem" class="cs-heading animate-on-scroll">The Problem</h2>
 
@@ -136,7 +134,6 @@
           to fix that from scratch.
         </p>
 
-        <!-- Callout box -->
         <aside class="cs-callout animate-on-scroll" aria-label="Operating Solo highlight">
           <p class="cs-callout-title">Operating Solo</p>
           <p class="cs-callout-body">
@@ -164,7 +161,7 @@
          SECTION 2 — My Role
          ===================================================== -->
     <section class="cs-section cs-section--alt" aria-labelledby="s-role">
-      <div class="container cs-content">
+      <div class="cs-content">
 
         <h2 id="s-role" class="cs-heading animate-on-scroll">What I Was Responsible For</h2>
 
@@ -185,11 +182,10 @@
          SECTION 3 — The Process
          ===================================================== -->
     <section class="cs-section" aria-labelledby="s-process">
-      <div class="container cs-content">
+      <div class="cs-content">
 
         <h2 id="s-process" class="cs-heading animate-on-scroll">The Process: Manual to Automated</h2>
 
-        <!-- Phase 1 -->
         <div class="cs-phase animate-on-scroll">
           <h3 class="cs-subheading">Phase 1 — Manual Operations <span class="cs-phase-date">(March–December 2025)</span></h3>
           <p class="cs-body">
@@ -201,7 +197,6 @@
           </p>
         </div>
 
-        <!-- Phase 2 -->
         <div class="cs-phase animate-on-scroll">
           <h3 class="cs-subheading">Phase 2 — Building the Dashboard</h3>
           <p class="cs-body">
@@ -211,7 +206,6 @@
           </p>
         </div>
 
-        <!-- Phase 3 -->
         <div class="cs-phase animate-on-scroll">
           <h3 class="cs-subheading">Phase 3 — Automation Launch <span class="cs-phase-date">(January 2026)</span></h3>
           <p class="cs-body">
@@ -242,7 +236,7 @@
          SECTION 4 — Dashboard Architecture
          ===================================================== -->
     <section class="cs-section cs-section--alt" aria-labelledby="s-architecture">
-      <div class="container cs-content">
+      <div class="cs-content">
 
         <h2 id="s-architecture" class="cs-heading animate-on-scroll">The 6-Page Dashboard</h2>
 
@@ -311,7 +305,7 @@
          SECTION 5 — Design Decisions
          ===================================================== -->
     <section class="cs-section" aria-labelledby="s-design-decisions">
-      <div class="container cs-content">
+      <div class="cs-content">
 
         <h2 id="s-design-decisions" class="cs-heading animate-on-scroll">Design Decisions</h2>
 
@@ -331,7 +325,7 @@
          SECTION 6 — Real Impact
          ===================================================== -->
     <section class="cs-section cs-section--alt" aria-labelledby="s-impact">
-      <div class="container cs-content">
+      <div class="cs-content">
 
         <h2 id="s-impact" class="cs-heading animate-on-scroll">Real Impact</h2>
 
@@ -339,7 +333,6 @@
           The dashboard doesn't just report data, it drives real fixes.
         </p>
 
-        <!-- Callout box -->
         <aside class="cs-callout animate-on-scroll" aria-label="400 Error Crisis example">
           <p class="cs-callout-title">Example: 400 Error Crisis</p>
           <p class="cs-callout-body">
@@ -364,10 +357,10 @@
 
 
     <!-- =====================================================
-         SECTION 6 — Key Learnings
+         SECTION 7 — What I Learnt
          ===================================================== -->
     <section class="cs-section cs-section--alt" aria-labelledby="s-learnings">
-      <div class="container cs-content">
+      <div class="cs-content">
 
         <h2 id="s-learnings" class="cs-heading animate-on-scroll">What I Learnt</h2>
 
@@ -395,10 +388,10 @@
 
 
     <!-- =====================================================
-         SECTION 7 — What's Next
+         SECTION 8 — What's Next
          ===================================================== -->
     <section class="cs-section" aria-labelledby="s-next-steps">
-      <div class="container cs-content">
+      <div class="cs-content">
 
         <h2 id="s-next-steps" class="cs-heading animate-on-scroll">What's Next</h2>
 
@@ -414,13 +407,13 @@
 
 
     <!-- =====================================================
-         NEXT PROJECT — terracotta CTA band at the foot of the page
+         NEXT PROJECT — dark band
          ===================================================== -->
     <section class="cs-next-project" aria-label="Next project">
       <div class="container cs-next-inner animate-on-scroll">
         <span class="cs-next-label">Next Project</span>
-        <a href="student-registration.html" class="cs-next-link">
-          Student Registration Redesign
+        <a href="password.html?project=qualifications" class="cs-next-link">
+          Qualifications &amp; Courses — From Confusion to Clarity
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
             <path d="M5 10h10m0 0l-4-4m4 4l-4 4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </svg>
@@ -431,7 +424,7 @@
   </main>
 
   <!-- =====================================================
-       FOOTER — same as index.html
+       FOOTER
        ===================================================== -->
   <footer class="site-footer">
     <div class="container footer-inner">

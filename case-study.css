@@ -765,3 +765,207 @@ body.theme-blue {
   .cs-two-col      { padding-inline: 16px; }
   .cs-change-cards { padding-inline: 16px; }
 }
+
+
+/* ==== INLINE IMAGES (qualifications + shared) ==== */
+
+/* Wrapper: applies border-radius, shadow, max-height, fade */
+.cs-img-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  max-height: 500px;
+}
+
+.cs-img-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Fade gradient at the bottom of every image */
+.cs-img-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, #ffffff);
+  pointer-events: none;
+}
+
+/* Shorter variant (e.g. mobile screenshots) */
+.cs-img-wrap--short { max-height: 400px; }
+
+/* In alt-background sections the fade should match */
+.cs-section--alt .cs-img-wrap::after {
+  background: linear-gradient(to bottom, transparent, var(--bg-alt));
+}
+
+/* Caption */
+.cs-img-caption {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: #bbb;
+  font-style: italic;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Figure wrapper (image + caption) */
+.cs-img-figure {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Two-column image grid */
+.cs-img-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 28px;
+  padding-inline: 24px;
+  max-width: var(--container);
+  margin-inline: auto;
+}
+
+/* Full-width image inside a content block */
+.cs-img-full-wrap {
+  margin-top: 28px;
+}
+
+/* "Before and After" sub-heading */
+.cs-ba-heading {
+  font-family: var(--font-heading);
+  font-size: 1.375rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-top: 40px;
+  margin-bottom: 4px;
+  padding-inline: 24px;
+  max-width: var(--container);
+  margin-inline: auto;
+  margin-top: 40px;
+}
+
+/* Small accent section label (e.g. "Designing for the new Level 4 qualification") */
+.cs-section-accent-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent, var(--text-muted));
+  margin-top: 36px;
+  margin-bottom: 12px;
+  padding-inline: 24px;
+  max-width: var(--container);
+  margin-inline: auto;
+}
+
+
+/* ==== PROTOTYPE CARD ==== */
+.cs-prototype-wrap {
+  padding: 48px 24px;
+  max-width: var(--container);
+  margin-inline: auto;
+}
+
+.cs-prototype-card {
+  background: #f4fbf8;
+  border-radius: 14px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.cs-prototype-content { flex: 1; min-width: 0; }
+
+.cs-prototype-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #3d8c6a;
+  margin-bottom: 10px;
+}
+
+.cs-prototype-heading {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.cs-prototype-text {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: #888;
+  font-weight: 300;
+  line-height: 1.65;
+  max-width: 420px;
+}
+
+.cs-prototype-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.cs-prototype-btn {
+  display: block;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.cs-prototype-btn--primary {
+  background: #3d8c6a;
+  color: #ffffff;
+  border: 1.5px solid #3d8c6a;
+}
+.cs-prototype-btn--primary:hover {
+  background: #347a5d;
+  border-color: #347a5d;
+}
+
+.cs-prototype-btn--outline {
+  background: #ffffff;
+  color: #3d8c6a;
+  border: 1.5px solid #3d8c6a;
+}
+.cs-prototype-btn--outline:hover {
+  background: #3d8c6a;
+  color: #ffffff;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 700px) {
+  .cs-prototype-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .cs-prototype-buttons { width: 100%; }
+  .cs-prototype-btn { text-align: center; }
+  .cs-img-grid { grid-template-columns: 1fr; }
+  .cs-img-grid .cs-img-wrap--short { max-height: 500px; }
+  .cs-ba-heading { margin-top: 32px; }
+}

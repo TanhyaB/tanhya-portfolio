@@ -797,8 +797,13 @@ body.theme-blue {
   pointer-events: none;
 }
 
-/* Shorter variant (e.g. mobile screenshots) */
+/* Height variants */
 .cs-img-wrap--short { max-height: 400px; }
+.cs-img-wrap--420   { max-height: 420px; }
+.cs-img-wrap--480   { max-height: 480px; }
+.cs-img-wrap--520   { max-height: 520px; }
+.cs-img-wrap--560   { max-height: 560px; }
+.cs-img-wrap--600   { max-height: 600px; }
 
 /* In alt-background sections the fade should match */
 .cs-section--alt .cs-img-wrap::after {
@@ -840,15 +845,39 @@ body.theme-blue {
 /* "Before and After" sub-heading */
 .cs-ba-heading {
   font-family: var(--font-heading);
-  font-size: 1.375rem;
+  font-size: 1.5rem;
   font-weight: 400;
+  font-style: italic;
   color: var(--text);
-  margin-top: 40px;
-  margin-bottom: 4px;
   padding-inline: 24px;
   max-width: var(--container);
   margin-inline: auto;
   margin-top: 40px;
+  margin-bottom: 4px;
+}
+
+/* BEFORE / AFTER column labels */
+.cs-ba-col-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 8px;
+}
+.cs-ba-col-label--after { color: #3d8c6a; }
+
+/* Small descriptive subtext beneath an image caption */
+.cs-img-subtext {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: #aaa;
+  font-style: italic;
+  line-height: 1.6;
+  margin-top: 8px;
+  text-align: center;
 }
 
 /* Small accent section label (e.g. "Designing for the new Level 4 qualification") */

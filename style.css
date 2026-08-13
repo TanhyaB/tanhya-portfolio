@@ -512,17 +512,14 @@ main {
 .project-card-image {
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: var(--bg-alt);
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .project-card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top;
   display: block;
   transition: transform 0.5s var(--ease);
 }
@@ -630,15 +627,9 @@ main {
 }
 
 .project-wide-image {
-  background: #f0f0f0;
   position: relative;
   overflow: hidden;
   min-height: 260px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 12px;
   border-left: 1px solid var(--border);
 }
 
@@ -647,7 +638,8 @@ main {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: top;
   display: block;
 }
 
@@ -1120,7 +1112,7 @@ main {
   .project-wide { grid-template-columns: 1fr; }
   .project-wide-body { padding: 36px; }
   .project-wide-image {
-    min-height: 200px;
+    min-height: 300px;
     border-left: none;
     border-top: 1px solid var(--border);
   }

@@ -976,7 +976,16 @@ main {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 32px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
 }
+
+.about-pg-clocked-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+.about-pg-clocked-card:hover { transition-delay: 0s; }
 
 .about-pg-clocked-card-title {
   font-family: var(--font-heading);

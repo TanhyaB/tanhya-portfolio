@@ -490,13 +490,12 @@ main {
 .project-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-bottom: 24px;
+  gap: 16px;
 }
 
 .project-card {
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: 14px;
   overflow: hidden;
   background: var(--bg);
   display: flex;
@@ -510,9 +509,10 @@ main {
 }
 
 .project-card-image {
-  aspect-ratio: 16 / 9;
+  height: 220px;
   overflow: hidden;
   position: relative;
+  flex-shrink: 0;
 }
 
 .project-card-image img {
@@ -585,6 +585,50 @@ main {
   line-height: 1.65;
   margin-bottom: 24px;
   flex: 1;
+}
+
+/* Shimmer "in progress" image area */
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-150%); }
+  100% { transform: translateX(400%); }
+}
+
+.project-card-image--shimmer {
+  background: linear-gradient(135deg, #f7f7f7, #f0f0f0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-card-image--shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 35%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+  animation: shimmer-sweep 2.8s ease-in-out infinite;
+}
+
+.shimmer-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: #bbb;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+/* Disabled "Coming Soon" button */
+.project-card-cta--disabled {
+  border: 1px solid #e8e8e8;
+  color: #bbb;
+  background: var(--bg);
+  cursor: default;
+  pointer-events: none;
+  display: inline-block;
 }
 
 /* Wide single-row card (Quick Links) */
@@ -1126,14 +1170,6 @@ main {
   .hero-ctas { justify-content: center; }
 
   .project-grid { grid-template-columns: 1fr; }
-
-  .project-wide { grid-template-columns: 1fr; }
-  .project-wide-body { padding: 36px; }
-  .project-wide-image {
-    min-height: 300px;
-    border-left: none;
-    border-top: 1px solid var(--border);
-  }
 
   .about-pg-hero-container {
     grid-template-columns: 1fr;
